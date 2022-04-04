@@ -2,82 +2,70 @@ import logo from './logo.svg';
 import './App.css';
 import React,{useState,useEffect} from 'react';
 import Card from './components/Card/card.component';
+import Details from './components/Details/details.component'
 import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Card1 from './assets/Card.svg' ;
-import Deck from './assets/Deck.svg' ;
-import Female from './assets/Gender-Female.svg' ;
-import male from './assets/Gender-Male.svg' ;
-import HomeWorld from './assets/Homeworld.svg' ;
-import Search from './assets/Search.svg' ;
-import Starship from './assets/Starship.svg' ;
-import Vehicle from './assets/Vehicle.svg' ;
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 function App() {
 
   const [people,setPeople]=useState([]);
+  const [home,setHome]=useState([]);
+  const [ship,setShip]=useState([]);
   const [loading,setLoading]=useState(true);
-  
+  const [width, setWindowWidth] = useState(0);
+  const updateDimensions = () => {
+    const width = window.innerWidth
+    setWindowWidth(width)
+  }
   useEffect(()=>{
     async function fetchpeople(){
       try {
         setLoading(true);
         // let res = await fetch('https://swapi.co/api/people/?format=json');
         let res = await fetch('https://swapi.dev/api/people');
+        let res1 = await fetch('https://swapi.dev/api/planets/');
+        let res2 = await fetch('https://swapi.dev/api/starships');
         let data = await res.json();
+        let data1 =await res1.json();
+        let data2 =await res2.json();
         setPeople(data.results);
+        setHome(data1.results);
+        setShip(data2.results);
         setLoading(false);        
       } catch (error) {
         console.log(error)
       }
     }
     fetchpeople();
-    console.log(people[0])
   },[])
-  const [home,setHome]=useState([]);
-  const [loading1,setLoading1]=useState(true);
-    useEffect(() => {
-        async function fetchHome(){
-            try {
-              setLoading1(true);
-              // let res = await fetch('https://swapi.co/api/people/?format=json');
-              let res1 = await fetch('https://swapi.dev/api/planets/');
-              let data1 = await res1.json();
-              setHome(data1.results);
-              setLoading1(false);        
-            } catch (error) {
-              console.log(error)
-            }
-          }
-          fetchHome();
-      console.log(home[0])
-    }, [])
-    /*const [ship,setShip]=useState([]);
-    useEffect(() => {
-        async function fetchShip(){
-            try {
-              setLoading(true);
-              // let res = await fetch('https://swapi.co/api/people/?format=json');
-              let res2 = await fetch('https://swapi.dev/api/starships');
-              let data2 = await res2.json();
-              setShip(data2.results);
-              setLoading(false);        
-            } catch (error) {
-              console.log(error)
-            }
-          }
-          fetchShip();
-      console.log(home[0])
-    }, [])*/
+
   return (
+    <Router>
     <div className="App">
       {
         !loading && 
-        <>
-          <Card person={people[0]} live={home[0]}/>
-          {/*<Card person={people[0]} live={home[0]} />*/}
+        <>{
+          people.map((person) => (
+            <div className='item'>
+              <Link to='/detail'>
+                <Card person={person} key={person.name}/>
+              </Link>
+            </div>
+          ))
+          }
+
         </>
       }
+      <Switch>
+        <Route path="/detail" element={<Details person={0}/>} />
+    </Switch>
     </div>
+    </Router>
   );
 }
 

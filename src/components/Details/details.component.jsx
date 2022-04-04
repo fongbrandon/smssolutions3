@@ -1,4 +1,4 @@
-import './card.component.css'
+import './details.component.css'
 import { useState,useEffect } from 'react'
 import Card1 from '../../assets/Card.svg'
 import Deck from '../../assets/Deck.svg' ;
@@ -9,7 +9,7 @@ import Search from '../../assets/Search.svg' ;
 import Starship from '../../assets/Starship.svg' ;
 import Vehicle from '../../assets/Vehicle.svg' ;
 
-export default function Card({person}){
+export default function Details({person}){
     const [home, setHome]=useState({});
     const [species, setSpecies]=useState({});
     const [loading, setLoading]=useState(true);
@@ -42,7 +42,7 @@ export default function Card({person}){
     },[])
 
     return (
-        <div className='Card'>
+        <div className='Details'>
             
             <div>
                 <div className='nameicon'><img src={Deck} alt="" height='15px;' /></div>
@@ -60,11 +60,11 @@ export default function Card({person}){
             
             <div>
             <img src={Starship} alt="" height='15px;' />
-                Starships: {person.starships.length}
+                Starships: {person.starships}
             </div>
             <div>
             <img src={Vehicle} alt="" height='15px;' />
-                Vehicles {person.vehicles.length}
+                Vehicles {person.vehicles}
             </div>
         </div>
     )

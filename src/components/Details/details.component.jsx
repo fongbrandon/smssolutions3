@@ -15,7 +15,8 @@ export default function Details({person}){
     const [loading, setLoading]=useState(true);
 
     useEffect(()=>{
-        console.log(person)
+        console.log(person);
+        //setPerson(person);
         async function compare(){
             try{
                 setLoading(true);

@@ -8,12 +8,14 @@ import HomeWorld from '../../assets/Homeworld.svg' ;
 import Search from '../../assets/Search.svg' ;
 import Starship from '../../assets/Starship.svg' ;
 import Vehicle from '../../assets/Vehicle.svg' ;
+import { useSelector, useDispatch } from 'react-redux'
+
 
 export default function Details({person}){
     const [home, setHome]=useState({});
     const [species, setSpecies]=useState({});
     const [loading, setLoading]=useState(true);
-
+    //const [person, setPerson]=useState({});
     useEffect(()=>{
         console.log(person);
         //setPerson(person);

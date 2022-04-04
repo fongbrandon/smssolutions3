@@ -2,8 +2,8 @@ import './card.component.css'
 import { useState,useEffect } from 'react'
 
 
-export default function Card({person}){
-    const [home,setHome]=useState([]);
+export default function Card({person},{live}){
+    {/*const [home,setHome]=useState([]);
     const [loading,setLoading]=useState(true);
     useEffect(() => {
         async function fetchHome(){
@@ -22,7 +22,7 @@ export default function Card({person}){
       console.log(home[0])
     }, [])
     var ship=home.name
-    var shipcount=ship.length
+var shipcount=ship.length*/}
     return (
         <div className='Card'>
             
@@ -30,7 +30,8 @@ export default function Card({person}){
                 Name: {person.name}
             </div>
             <div>
-                Homeworld {shipcount}
+                {/*Homeworld {live.count}*/}
+                Homeworld 
             </div>
             <div>
                 Gender {person.gender}

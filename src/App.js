@@ -34,15 +34,16 @@ function App() {
     console.log(people[0])
   },[])
   const [home,setHome]=useState([]);
+  const [loading1,setLoading1]=useState(true);
     useEffect(() => {
         async function fetchHome(){
             try {
-              setLoading(true);
+              setLoading1(true);
               // let res = await fetch('https://swapi.co/api/people/?format=json');
               let res1 = await fetch('https://swapi.dev/api/planets/');
               let data1 = await res1.json();
               setHome(data1.results);
-              setLoading(false);        
+              setLoading1(false);        
             } catch (error) {
               console.log(error)
             }
@@ -72,7 +73,7 @@ function App() {
       {
         !loading && 
         <>
-          <Card person={people[0]} />
+          <Card person={people[0]} live={home[0]}/>
           {/*<Card person={people[0]} live={home[0]} />*/}
         </>
       }
